@@ -4,7 +4,7 @@ WORKDIR /workspace/app
 
 COPY . /workspace/app
 RUN chmod -R 0700 /workspace/app
-RUN ./gradlew build
+RUN ./gradle wrapper && ./gradlew build
 RUN mkdir -p build/dependency && (cd build/dependency; jar -xf ../libs/*.jar)
 
 FROM openjdk:8-jdk-alpine
