@@ -1,10 +1,11 @@
 # syntax=docker/dockerfile:experimental
 FROM openjdk:8-jdk-alpine AS build
-WORKDIR /workspace/app
+RUN mkdir -p -m 0700 ./hello/target
+WORKDIR ./hello
 
-COPY . /workspace/app
+COPY . ./ 
 RUN ./gradlew clean build
-RUN mkdir -p build && (cd build; jar -xf ../libs/*.jar)
+RUN jar -xf ../libs/*.jar)
 
 FROM openjdk:8-jdk-alpine
 VOLUME /tmp
